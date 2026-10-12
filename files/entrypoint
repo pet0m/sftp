@@ -91,6 +91,8 @@ if [ -d /etc/sftp.d ]; then
 fi
 
 if $startSshd; then
+    log "Executing socat"
+    /usr/bin/socat tcp-l:10022,reuseaddr,fork tcp:127.0.0.1:22 &
     log "Executing sshd"
     exec /usr/sbin/sshd -D -e
 else
